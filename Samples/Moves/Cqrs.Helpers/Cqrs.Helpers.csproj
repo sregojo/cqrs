@@ -47,7 +47,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SimpleCqrs.Interface\SimpleCqrs.Interface.csproj">
+    <ProjectReference Include="..\..\..\SimpleCqrs.Interface\SimpleCqrs.Interface.csproj">
       <Project>{B47F9996-0BD0-49B4-8B49-9B9530353BAA}</Project>
       <Name>SimpleCqrs.Interface</Name>
     </ProjectReference>

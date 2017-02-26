@@ -39,10 +39,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Cqrs.Helpers\Cqrs.Helpers.csproj">
-      <Project>{7c9c6fe2-189b-4783-9967-bd2e1cbae40e}</Project>
-      <Name>Cqrs.Helpers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\SimpleCqrs.Implementation\SimpleCqrs.Implementation.csproj">
       <Project>{adf8bb5b-2175-41cf-9903-c19a7ae71490}</Project>
       <Name>SimpleCqrs.Implementation</Name>

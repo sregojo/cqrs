@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveManager.Business", "Sam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveManager.Host", "Samples\Moves\MoveManager.Host\MoveManager.Host.csproj", "{D3393582-0DEB-4A2E-8A56-CE7FC69DC7BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cqrs.Helpers", "Cqrs.Helpers\Cqrs.Helpers.csproj", "{7C9C6FE2-189B-4783-9967-BD2E1CBAE40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cqrs.Helpers", "Samples\Moves\Cqrs.Helpers\Cqrs.Helpers.csproj", "{7C9C6FE2-189B-4783-9967-BD2E1CBAE40E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
