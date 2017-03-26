@@ -3,12 +3,22 @@ using System.Collections.Generic;
 
 namespace SimpleCqrs.Interface
 {
-    public interface IAggregateRoot
+    public interface IAggregateRoot<T> : IAggregateRoot
     {
-        Guid AggregateRootId { get; }
+        T Model { get; }
+    }
+
+    public interface IAggregateRoot : IEventSourced
+    {
+        IEither<IEnumerable<ICommandError>, IEnumerable<IEvent>> Handle(ICommand command);
+    }
+
+    public interface IEventSourced
+    {
+        Guid Id { get; }
 
         long Version { get; }
 
-        IAggregateRoot Apply(IEnumerable<IPersistedEvent> events);
+        IEventSourced Apply(IEnumerable<IPersistedEvent> events);
     }
 }

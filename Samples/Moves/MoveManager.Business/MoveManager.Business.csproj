@@ -34,13 +34,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agent\Agent.CommandHandling.cs" />
+    <Compile Include="Agent\Agent.EventHandling.cs" />
+    <Compile Include="Agent\Agent.CommandErrors.cs" />
     <Compile Include="Agent\Commands.cs" />
     <Compile Include="Agent\Events.cs" />
-    <Compile Include="Agent\CommandHandler.cs" />
-    <Compile Include="Agent\AgentAggregateRoot.cs" />
+    <Compile Include="Agent\Agent.cs" />
+    <Compile Include="CallCenter\CallCenterAggregateRoot.EventHandling.cs" />
+    <Compile Include="CallCenter\CallCenterAggregateRoot.cs" />
+    <Compile Include="CallCenter\CallCenterAggregateRoot.CommandHandling.cs" />
+    <Compile Include="CallCenter\Commands.cs" />
+    <Compile Include="CallCenter\Events.cs" />
+    <Compile Include="Customer\Customer.EventHandling.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="Customer\CustomerAggregateRoot.cs" />
-    <Compile Include="Customer\CommandHandler.cs" />
+    <Compile Include="Customer\Customer.cs" />
+    <Compile Include="Customer\Customer.CommandHandling.cs" />
     <Compile Include="Customer\Commands.cs" />
     <Compile Include="Customer\Events.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -54,10 +62,6 @@
     <ProjectReference Include="..\..\..\SimpleCqrs.Interface\SimpleCqrs.Interface.csproj">
       <Project>{b47f9996-0bd0-49b4-8b49-9b9530353baa}</Project>
       <Name>SimpleCqrs.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Cqrs.Helpers\Cqrs.Helpers.csproj">
-      <Project>{7c9c6fe2-189b-4783-9967-bd2e1cbae40e}</Project>
-      <Name>Cqrs.Helpers</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -34,16 +34,16 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IHandleCommand.cs" />
+    <Compile Include="ICommandError.cs" />
+    <Compile Include="IEither.cs" />
     <Compile Include="IAggregateRoot.cs" />
     <Compile Include="ICommandProcessor.cs" />
     <Compile Include="IEvent.cs" />
-    <Compile Include="IAggregateStorage.cs" />
+    <Compile Include="IEventStorage.cs" />
     <Compile Include="IApplyEvent.cs" />
     <Compile Include="ICommand.cs" />
-    <Compile Include="ICommandHandler.cs" />
-    <Compile Include="ICommandHandlerInvoker.cs" />
     <Compile Include="IEventHandler.cs" />
-    <Compile Include="ICommandHandlerLocator.cs" />
     <Compile Include="IPersistedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

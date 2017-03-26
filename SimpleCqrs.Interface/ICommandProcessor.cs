@@ -1,9 +1,10 @@
-﻿namespace SimpleCqrs.Interface
+﻿using System.Collections.Generic;
+
+namespace SimpleCqrs.Interface
 {
     public interface ICommandProcessor
     {
-        void Process<TAggregate, TCommand>(TCommand command)
-            where TAggregate : IAggregateRoot
-            where TCommand : ICommand<TAggregate>;
+        IEither<IEnumerable<ICommandError>, TAggregate> Process<TAggregate>(ICommand<TAggregate> command)
+            where TAggregate : IAggregateRoot;
     }
 }

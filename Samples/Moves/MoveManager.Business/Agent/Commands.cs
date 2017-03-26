@@ -1,18 +1,18 @@
 ﻿using System;
-using Cqrs.Helpers;
+using SimpleCqrs.Implementation;
 
 namespace MoveManager.Business.Agent
 {
     public class Commands
     {
-        public class AgentUpdateCommand : CommandBase<AgentAggregateRoot, Model.Agent>
+        public class AgentUpdateCommand : CommandBase<Agent, Model.Agent>
         {
-            public override Guid AggregateId => Data.AgentId;
+            public override Guid AggregateId => this.Data.AgentId;
         }
 
-        public class AppointmentUpdateCommand : CommandBase<AgentAggregateRoot, Model.Appointment>
+        public class AppointmentUpdateCommand : CommandBase<Agent, Model.Appointment>
         {
-            public override Guid AggregateId => Data.AgentId;
+            public override Guid AggregateId => this.Data.AgentId;
         }
     }
 }

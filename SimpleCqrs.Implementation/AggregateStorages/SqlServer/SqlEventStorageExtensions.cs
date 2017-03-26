@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Newtonsoft.Json;
+using SimpleCqrs.Interface;
 
 namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
 {
@@ -11,6 +12,10 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
         public static IEnumerable<EventStorageRecord> LoadEventsRecords(this SqlConnection connection,
             Guid aggregateRootId, long version)
         {
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (aggregateRootId == Guid.Empty) throw new ArgumentNullException(nameof(aggregateRootId));
+            if (version < 0) throw new ArgumentException("Value cannot be negative", nameof(connection));
+
             var eventsRecords = new List<EventStorageRecord>();
             using (var command = connection.CreateCommand())
             {
@@ -26,9 +31,9 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
                             new EventStorageRecord
                             {
                                 AggregateRootId = new Guid(reader.GetSqlGuid(0).ToByteArray()),
-                                Version         = reader.GetInt32(1),
-                                Type            = reader.GetString(2),
-                                Payload         = reader.GetString(3)
+                                Version = reader.GetInt32(1),
+                                Type = reader.GetString(2),
+                                Payload = reader.GetString(3)
                             });
                 }
             }
@@ -41,6 +46,12 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
         public static void StoreEvent(this SqlConnection connection, Guid aggregateRootId, long version, string type,
             string payload)
         {
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (aggregateRootId == Guid.Empty) throw new ArgumentNullException(nameof(aggregateRootId));
+            if (version < 0) throw new ArgumentException("Value cannot be negative", nameof(connection));
+            if (string.IsNullOrEmpty(payload))
+                throw new ArgumentException("Value cannot be null nor empty", nameof(payload));
+
             using (var command = connection.CreateCommand())
             {
                 command.CommandText =
@@ -57,6 +68,9 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
         public static SnapshotStorageRecord LoadAggregateSnapShotRecord(this SqlConnection connection,
             Guid aggregateRootId)
         {
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (aggregateRootId == Guid.Empty) throw new ArgumentNullException(nameof(aggregateRootId));
+
             var aggregateData = new List<SnapshotStorageRecord>();
             using (var command = connection.CreateCommand())
             {
@@ -70,9 +84,9 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
                         aggregateData.Add(
                             new SnapshotStorageRecord
                             {
-                                AggregateRootId = new Guid(reader.GetSqlGuid(0).ToByteArray()),
-                                Version         = reader.GetInt64(1),
-                                Payload         = reader.GetString(2)
+                                AggregateRootId = reader.GetSqlGuid(0).Value,
+                                Version = reader.GetInt64(1),
+                                Payload = reader.GetString(2)
                             });
                 }
             }
@@ -83,6 +97,12 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
         public static void StoreAggregateRootSnapShot(this SqlConnection connection, Guid aggregateRootId, long version,
             string payload)
         {
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (aggregateRootId == Guid.Empty) throw new ArgumentNullException(nameof(aggregateRootId));
+            if (version < 0) throw new ArgumentException("Value cannot be negative", nameof(connection));
+            if (string.IsNullOrEmpty(payload))
+                throw new ArgumentException("Value cannot be null nor empty", nameof(payload));
+
             using (var command = connection.CreateCommand())
             {
                 command.CommandText =
@@ -95,19 +115,36 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
             }
         }
 
-        public static bool TryLoadAggregateSnapshot<T>(this SqlConnection connection, Guid aggregateRootId, out T aggregateRootInstance)
+        public static bool TryLoadAggregateSnapshot<T>(this SqlConnection connection, Guid aggregateRootId,
+            out T aggregateRootInstance)
         {
+            if (connection == null) throw new ArgumentNullException(nameof(connection));
+            if (aggregateRootId == Guid.Empty) throw new ArgumentNullException(nameof(aggregateRootId));
+
             var aggregateRootRecord = connection.LoadAggregateSnapShotRecord(aggregateRootId);
             if (aggregateRootRecord == null)
             {
                 aggregateRootInstance = default(T);
                 return false;
             }
-            else
-            {
-                aggregateRootInstance = JsonConvert.DeserializeObject<T>(aggregateRootRecord.Payload);
-                return true;
-            }
+            aggregateRootInstance = JsonConvert.DeserializeObject<T>(aggregateRootRecord.Payload);
+            return true;
+        }
+
+        public static IEnumerable<IPersistedEvent> Deserialize(this IEnumerable<EventStorageRecord> eventsRecords)
+        {
+            var eventInstances = eventsRecords
+                .Select(r => Deserialize(r.AggregateRootId, r.Version, r.Type, r.Payload))
+                .OrderBy(e => e.Version);
+
+            return eventInstances;
+        }
+
+        public static IPersistedEvent Deserialize(Guid aggregateRootId, long version, string typeName, string payload)
+        {
+            var eventType = Type.GetType(typeName);
+            var eventInstance = (IEvent) JsonConvert.DeserializeObject(payload, eventType);
+            return new PersistedEvent(aggregateRootId, version, eventInstance);
         }
     }
 }

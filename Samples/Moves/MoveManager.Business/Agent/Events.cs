@@ -1,4 +1,4 @@
-﻿using Cqrs.Helpers;
+﻿using SimpleCqrs.Implementation;
 
 namespace MoveManager.Business.Agent
 {
@@ -8,7 +8,7 @@ namespace MoveManager.Business.Agent
         {
             public AgentNewEvent(Model.Agent data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
 
@@ -16,7 +16,7 @@ namespace MoveManager.Business.Agent
         {
             public AgentUpdatedEvent(Model.Agent data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
 
@@ -24,7 +24,7 @@ namespace MoveManager.Business.Agent
         {
             public AppointmentUpdatedEvent(Model.Appointment data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
 
@@ -32,8 +32,8 @@ namespace MoveManager.Business.Agent
         {
             public AppointmentNewEvent(long appointmentId, Model.Appointment data)
             {
-                Data = data;
-                Data.AppointmentId = appointmentId;
+                this.Data = data;
+                this.Data.AppointmentId = appointmentId;
             }
         }
     }

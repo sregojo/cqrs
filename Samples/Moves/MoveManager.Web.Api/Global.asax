@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="MoveManager.Web.Api.WebApiApplication" Language="C#" %>

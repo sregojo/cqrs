@@ -1,23 +1,23 @@
 ﻿using System;
-using Cqrs.Helpers;
+using SimpleCqrs.Implementation;
 
 namespace MoveManager.Business.Customer
 {
     public class Commands
     {
-        public class CustomerUpdateCommand : CommandBase<CustomerAggregateRoot, Model.Customer>
+        public class CustomerUpdateCommand : CommandBase<Customer, Model.Customer>
         {
-            public override Guid AggregateId => Data.CustomerId;
+            public override Guid AggregateId => this.Data.CustomerId;
         }
 
-        public class MoveUpdateCommand : CommandBase<CustomerAggregateRoot, Model.Move>
+        public class MoveUpdateCommand : CommandBase<Customer, Model.Move>
         {
-            public override Guid AggregateId => Data.CustomerId;
+            public override Guid AggregateId => this.Data.CustomerId;
         }
 
-        public class SurveyUpdateCommand : CommandBase<CustomerAggregateRoot, Model.Survey>
+        public class SurveyUpdateCommand : CommandBase<Customer, Model.Survey>
         {
-            public override Guid AggregateId => Data.CustomerId;
+            public override Guid AggregateId => this.Data.CustomerId;
         }
     }
 }

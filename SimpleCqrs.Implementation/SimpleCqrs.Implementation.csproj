@@ -30,26 +30,37 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Transactions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandBase.cs" />
+    <Compile Include="CommandResult.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="AggregateRoots\EventExtensions.cs" />
     <Compile Include="AggregateStorages\PersistedEvent.cs" />
+    <Compile Include="AggregateStorages\SqlServer\Configuration\SqlAggregateStorageConfiguration.cs" />
+    <Compile Include="AggregateStorages\SqlServer\Configuration\ISqlAggregateStorageConfiguration.cs" />
     <Compile Include="AggregateStorages\SqlServer\SqlAggregateStorage.cs" />
     <Compile Include="AggregateRoots\AggregateRootBase.cs" />
     <Compile Include="AggregateStorages\SqlServer\SqlEventStorageExtensions.cs" />
     <Compile Include="AggregateStorages\EventStorageRecord.cs" />
     <Compile Include="AggregateStorages\SnapshotStorageRecord.cs" />
-    <Compile Include="CommandHandlerInvokers\SecuentialCommandHandlerInvoker.cs" />
-    <Compile Include="CommandHandlersLocators\InMemoryCommandHandlerLocator.cs" />
-    <Compile Include="CommandProcessors\TransactionalCommandProcessor.cs" />
+    <Compile Include="Either.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\ICommandHandler.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\ICommandHandlerInvoker.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\ICommandHandlerLocator.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\CommandProcessor.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\SecuentialCommandHandlerInvoker.cs" />
+    <Compile Include="CommandProcessors\ExternalHandler\InMemoryCommandHandlerLocator.cs" />
+    <Compile Include="CommandProcessors\AggregateHandler\CommandProcessor.cs" />
+    <Compile Include="Envelope.cs" />
+    <Compile Include="EventBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

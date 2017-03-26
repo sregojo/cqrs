@@ -7,9 +7,14 @@ namespace SimpleCqrs.Implementation.AggregateStorages
     {
         public PersistedEvent(Guid aggregateRootId, long version, IEvent instance)
         {
-            AggregateRootId = aggregateRootId;
-            Version = version;
-            Instance = instance;
+            if (aggregateRootId == Guid.Empty)
+                throw new ArgumentException("Value cannot be null", nameof(aggregateRootId));
+            if (version < 0) throw new ArgumentException("Value cannot be negative", nameof(version));
+            if (instance == null) throw new ArgumentException("Value cannot be null", nameof(instance));
+
+            this.AggregateRootId = aggregateRootId;
+            this.Version = version;
+            this.Instance = instance;
         }
 
         public Guid AggregateRootId { get; }

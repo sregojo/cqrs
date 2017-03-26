@@ -1,4 +1,4 @@
-﻿using Cqrs.Helpers;
+﻿using SimpleCqrs.Implementation;
 
 namespace MoveManager.Business.Customer
 {
@@ -8,7 +8,7 @@ namespace MoveManager.Business.Customer
         {
             public CustomerUpdatedEvent(Model.Customer data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
 
@@ -16,7 +16,7 @@ namespace MoveManager.Business.Customer
         {
             public MoveUpdatedEvent(Model.Move data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
 
@@ -24,7 +24,7 @@ namespace MoveManager.Business.Customer
         {
             public SurveyUpdatedEvent(Model.Survey data)
             {
-                Data = data;
+                this.Data = data;
             }
         }
     }
