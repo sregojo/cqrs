@@ -5,7 +5,6 @@ using MoveManager.Business.Agent;
 using MoveManager.Business.Customer;
 using MoveManager.Web.Api.Models;
 using SimpleCqrs.Interface;
-using Commands = MoveManager.Business.Customer.Commands;
 
 namespace MoveManager.Web.Api.Services
 {
@@ -36,7 +35,7 @@ namespace MoveManager.Web.Api.Services
         private IEither<IEnumerable<ICommandError>, Customer> CreateOrUpdateCustomer(Model.Customer customer)
         {
             return this.CommandProcessor.Process(
-                new Commands.CustomerUpdateCommand
+                new Business.Customer.Commands.CustomerUpdateCommand
                 {
                     Data = customer
                 });

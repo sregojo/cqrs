@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveManager.Business", "Sam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveManager.Web.Api", "Samples\Moves\MoveManager.Web.Api\MoveManager.Web.Api.csproj", "{A6541E34-DF64-4DD6-81CD-259AC065E4E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoveManager.Web.Ui", "Samples\Moves\MoveManager.Web.Ui\MoveManager.Web.Ui.csproj", "{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,10 +37,6 @@ Global
 		{A6541E34-DF64-4DD6-81CD-259AC065E4E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6541E34-DF64-4DD6-81CD-259AC065E4E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6541E34-DF64-4DD6-81CD-259AC065E4E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +45,5 @@ Global
 		{FB12D5FE-D0FC-4EC5-B8F2-2E8B808DDB9B} = {325C21A7-455B-4D55-B2EF-B4AE508F7C2E}
 		{FC1A7B06-6954-46CB-BE22-A455C0F016EE} = {FB12D5FE-D0FC-4EC5-B8F2-2E8B808DDB9B}
 		{A6541E34-DF64-4DD6-81CD-259AC065E4E7} = {FB12D5FE-D0FC-4EC5-B8F2-2E8B808DDB9B}
-		{2A4FF96A-8A2C-4286-84AA-0293D09D7F5D} = {FB12D5FE-D0FC-4EC5-B8F2-2E8B808DDB9B}
 	EndGlobalSection
 EndGlobal

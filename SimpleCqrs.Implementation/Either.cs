@@ -19,10 +19,7 @@ namespace SimpleCqrs.Implementation
         {
             protected readonly T value;
 
-            protected Impl(T value)
-            {
-                this.value = value;
-            }
+            protected Impl(T value) { this.value = value; }
 
             protected TU Case<TU>(Func<T, TU> func)
             {
@@ -41,18 +38,10 @@ namespace SimpleCqrs.Implementation
 
         private sealed class LeftImpl<Tl, Tr> : Impl<Tl>, IEither<Tl, Tr>
         {
-            public LeftImpl(Tl value) : base(value)
-            {
-            }
-
-            public void Case(Action<Tl> ofLeft, Action<Tr> ofRight)
-                => base.Case(ofLeft);
+            public LeftImpl(Tl value) : base(value) { }
 
             public TU Case<TU>(Func<Tl, TU> ofLeft, Func<Tr, TU> ofRight)
                 => base.Case(ofLeft);
-
-            public IEither<TUl, TUr> Case<TUl, TUr>(Func<Tl, TUl> ofLeft, Func<Tr, TUr> ofRight)
-                => Create<TUl, TUr>(this.Case(ofLeft));
 
             public IEither<Tl, TU2r> Right<TU2r>(Func<Tr, TU2r> ofRight)
                 => Create<Tl, TU2r>(this.value);
@@ -63,18 +52,10 @@ namespace SimpleCqrs.Implementation
 
         private sealed class RightImpl<Tl, Tr> : Impl<Tr>, IEither<Tl, Tr>
         {
-            public RightImpl(Tr value) : base(value)
-            {
-            }
-
-            public void Case(Action<Tl> ofLeft, Action<Tr> ofRight)
-                => base.Case(ofRight);
+            public RightImpl(Tr value) : base(value) { }
 
             public TU Case<TU>(Func<Tl, TU> ofLeft, Func<Tr, TU> ofRight)
                 => base.Case(ofRight);
-
-            public IEither<TUl, TUr> Case<TUl, TUr>(Func<Tl, TUl> ofLeft, Func<Tr, TUr> ofRight)
-                => Create<TUl, TUr>(this.Case(ofRight));
 
             public IEither<Tl, TU2r> Right<TU2r>(Func<Tr, TU2r> ofRight)
                 => Create<Tl, TU2r>(ofRight(this.value));

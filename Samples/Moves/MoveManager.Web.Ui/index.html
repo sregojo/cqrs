@@ -1,15 +1,21 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en">
+<html>
 <head>
+    <title></title>
+    
     <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
-    <link rel="stylesheet" href="app.css" type="text/css" />
-    <script src="app.js"></script>
+    
+
+
+    <script data-main="app" src="lib/require.js"></script>
+    
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>TypeScript HTML App</h1>
+    <nav class="navbar navbar-default">
+        <menu-cmp/>
+    </nav>
 
-    <div id="content"></div>
+    <login-cmp/>
 </body>
 </html>
