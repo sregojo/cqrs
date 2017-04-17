@@ -8,6 +8,6 @@
 
         ko.components.register('menu-cmp', {
             viewModel: { require: 'cmp/menu/viewmodel' },
-            template: { require: 'text!cmp/menu/view.html' }
+            template:  { require: 'text!cmp/menu/view.html' }
         });
     });

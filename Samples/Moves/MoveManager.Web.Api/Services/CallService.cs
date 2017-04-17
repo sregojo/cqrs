@@ -23,7 +23,7 @@ namespace MoveManager.Web.Api.Services
             return
                 this.CreateOrUpdateCustomer(newAppointmentCall.Customer)
                     .Right(customer =>
-                        this.CreateOrUpdateAppointment(customer.Model.CustomerId, newAppointmentCall.Appointment)
+                        this.CreateOrUpdateAppointment(customer.Id, newAppointmentCall.Appointment)
                             .Right(
                                 agent => new NewAppointmentResponse
                                 {
@@ -32,7 +32,8 @@ namespace MoveManager.Web.Api.Services
                                 }));
         }
 
-        private IEither<IEnumerable<ICommandError>, Customer> CreateOrUpdateCustomer(Model.Customer customer)
+        private IEither<IEnumerable<ICommandError>, Customer> CreateOrUpdateCustomer(
+            Model.Customer customer)
         {
             return this.CommandProcessor.Process(
                 new Business.Customer.Commands.CustomerUpdateCommand
@@ -41,14 +42,14 @@ namespace MoveManager.Web.Api.Services
                 });
         }
 
-        private IEither<IEnumerable<ICommandError>, Agent> CreateOrUpdateAppointment(Guid customerId,
+        private IEither<IEnumerable<ICommandError>, Agent> CreateOrUpdateAppointment(
+            Guid customerId,
             Model.Appointment appointment)
         {
-            appointment.CustomerId = customerId;
-
             return this.CommandProcessor.Process(
                 new Business.Agent.Commands.AppointmentUpdateCommand
                 {
+                    CustomerId = customerId,
                     Data = appointment
                 });
         }

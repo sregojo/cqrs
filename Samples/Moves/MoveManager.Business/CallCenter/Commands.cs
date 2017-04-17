@@ -7,7 +7,7 @@ namespace MoveManager.Business.CallCenter
     {
         public class NewAppointmentCallCommand : CommandBase<CallCenterAggregateRoot, Model.AppointmentCall>
         {
-            public override Guid AggregateId => Guid.Empty;
+            protected override Guid DoAggregateId => Guid.Empty;
         }
     }
 }

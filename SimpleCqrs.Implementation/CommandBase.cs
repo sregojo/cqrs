@@ -6,6 +6,24 @@ namespace SimpleCqrs.Implementation
     public abstract class CommandBase<TAggregate, TData> : Envelope<TData>, ICommand<TAggregate>
         where TAggregate : IAggregateRoot
     {
-        public virtual Guid AggregateId { get; }
+        public Guid AggregateId {
+            get
+            {
+                try
+                {
+                    return this.DoAggregateId;
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidCommandException();
+                }
+            }
+        }
+
+        protected abstract Guid DoAggregateId { get; }
+    }
+
+    public class InvalidCommandException : Exception
+    {
     }
 }

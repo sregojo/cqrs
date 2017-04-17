@@ -7,17 +7,17 @@ namespace MoveManager.Business.Customer
     {
         public class CustomerUpdateCommand : CommandBase<Customer, Model.Customer>
         {
-            public override Guid AggregateId => this.Data.CustomerId;
+            protected override Guid DoAggregateId => this.Data.CustomerId;
         }
 
         public class MoveUpdateCommand : CommandBase<Customer, Model.Move>
         {
-            public override Guid AggregateId => this.Data.CustomerId;
+            protected override Guid DoAggregateId => this.Data.CustomerId;
         }
 
         public class SurveyUpdateCommand : CommandBase<Customer, Model.Survey>
         {
-            public override Guid AggregateId => this.Data.CustomerId;
+            protected override Guid DoAggregateId => this.Data.CustomerId;
         }
     }
 }

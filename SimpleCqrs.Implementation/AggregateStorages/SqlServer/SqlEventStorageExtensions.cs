@@ -38,7 +38,7 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
                 }
             }
 
-            if (eventsRecords.Count == 0) throw new Exception($"Cannot locate events from aggregte {aggregateRootId}");
+            if (eventsRecords.Count == 0) throw new NotExistingAggregate(aggregateRootId);
 
             return eventsRecords;
         }
@@ -146,5 +146,15 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
             var eventInstance = (IEvent) JsonConvert.DeserializeObject(payload, eventType);
             return new PersistedEvent(aggregateRootId, version, eventInstance);
         }
+    }
+
+    public class NotExistingAggregate : Exception
+    {
+        public NotExistingAggregate(Guid aggregateId)
+        {
+            this.AggregateId = aggregateId;
+        }
+
+        public Guid AggregateId { get; }
     }
 }

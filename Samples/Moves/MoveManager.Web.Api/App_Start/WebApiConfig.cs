@@ -5,6 +5,15 @@ namespace MoveManager.Web.Api
 {
     public static class WebApiConfig
     {
+        public static HttpConfiguration Register()
+        {
+            var config = new HttpConfiguration();
+
+            Register(config);
+
+            return config;
+        }
+
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services

@@ -14,6 +14,7 @@ namespace MoveManager.Business.Customer
     {
         public Customer(Guid aggregateRootId) : base(aggregateRootId)
         {
+            this.Model.CustomerId = aggregateRootId;
         }
     }
 }

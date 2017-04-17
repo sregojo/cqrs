@@ -9,11 +9,13 @@ namespace MoveManager.Business.Agent
         IApplyEvent<Events.AppointmentUpdatedEvent>,
         IApplyEvent<Events.AgentNewEvent>,
         IApplyEvent<Events.AgentUpdatedEvent>,
+
         IHandleCommand<Model.Agent, Commands.AgentUpdateCommand>,
         IHandleCommand<Model.Agent, Commands.AppointmentUpdateCommand>
     {
         public Agent(Guid aggregateRootId) : base(aggregateRootId)
         {
+            this.Model.AgentId = aggregateRootId;
         }
     }
 }

@@ -26,6 +26,27 @@ namespace MoveManager.Business
                     ||
                     endDate > a.StartDate && endDate <= a.EndDate);
             }
+
+            public bool IsValidAddress(Address address)
+            {
+                if (address == null) return false;
+
+                if (string.IsNullOrEmpty(address.Country)) return false;
+                if (string.IsNullOrEmpty(address.City)) return false;
+                if (string.IsNullOrEmpty(address.Street)) return false;
+
+                return true;
+            }
+
+            public bool IsValidSchedule(DateTime startDate, DateTime endDate)
+            {
+                if (startDate == DateTime.MinValue) return false;
+                if (endDate   == DateTime.MinValue) return false;
+
+                if (startDate >= endDate) return false;
+
+                return true;
+            }
         }
 
         public class Appointment

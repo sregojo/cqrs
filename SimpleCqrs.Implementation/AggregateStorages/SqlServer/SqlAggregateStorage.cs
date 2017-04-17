@@ -25,6 +25,7 @@ namespace SimpleCqrs.Implementation.AggregateStorages.SqlServer
 
                 if (aggregateRootId == Guid.Empty)
                     return this.NewAggregateRootInstance<T>(Guid.NewGuid());
+
                 var aggregateRoot = this.LoadSnapshotOrNewInstance<T>(aggregateRootId, connection);
 
                 var events = connection

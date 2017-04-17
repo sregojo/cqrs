@@ -12,6 +12,7 @@ namespace SimpleCqrs.Implementation.CommandProcessors
         {
             if (aggreagateStorage == null)
                 throw new ArgumentException("Value cannot be null", nameof(aggreagateStorage));
+
             this.AggregateStorage = aggreagateStorage;
         }
 

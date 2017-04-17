@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Web.Http;
 using MoveManager.Web.Api.Models;
 using MoveManager.Web.Api.Services;
+using SimpleCqrs.Implementation;
+using SimpleCqrs.Implementation.AggregateStorages.SqlServer;
 
 namespace MoveManager.Web.Api.Controllers
 {
@@ -14,9 +17,9 @@ namespace MoveManager.Web.Api.Controllers
             this.CallService = callService;
         }
 
-        [Route("Call/Appointment")]
+        [Route("call/appointment")]
         [HttpPost]
-        public IHttpActionResult PostAppointmentCall(NewAppointmentCallRequest newAppointmentCall)
+        public IHttpActionResult PostCallAppointment(NewAppointmentCallRequest newAppointmentCall)
         {
             try
             {
@@ -24,6 +27,14 @@ namespace MoveManager.Web.Api.Controllers
                     .Case<IHttpActionResult>(
                         errors => this.Conflict(),
                         newAppointmentResponse => this.Ok(newAppointmentResponse));
+            }
+            catch (InvalidCommandException)
+            {
+                return this.BadRequest();
+            }
+            catch (NotExistingAggregate)
+            {
+                return this.BadRequest();
             }
             catch (Exception ex)
             {

@@ -8,9 +8,7 @@ namespace SimpleCqrs.Implementation.AggregateRoots
     public abstract class EventSourced<T> : IEventSourced
         where T : new()
     {
-        protected EventSourced(Guid id) : this(id, 0, new T())
-        {
-        }
+        protected EventSourced(Guid id) : this(id, 0, new T()) { }
 
         protected EventSourced(Guid id, long version, T model)
         {

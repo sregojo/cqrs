@@ -10,6 +10,9 @@ namespace MoveManager.Business.Customer
             Model.Customer aggregateRoot,
             Commands.CustomerUpdateCommand command)
         {
+            if (string.IsNullOrEmpty(command.Data.Name))
+                return CommandResult.Failed("Name cannot be empty");
+
             return CommandResult.Handled(new Events.CustomerUpdatedEvent(command.Data));
         }
 

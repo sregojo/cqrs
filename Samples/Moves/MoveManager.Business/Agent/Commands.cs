@@ -7,12 +7,13 @@ namespace MoveManager.Business.Agent
     {
         public class AgentUpdateCommand : CommandBase<Agent, Model.Agent>
         {
-            public override Guid AggregateId => this.Data.AgentId;
+            protected override Guid DoAggregateId => this.Data.AgentId;
         }
 
         public class AppointmentUpdateCommand : CommandBase<Agent, Model.Appointment>
         {
-            public override Guid AggregateId => this.Data.AgentId;
+            public Guid CustomerId { get; set; }
+            protected override Guid DoAggregateId => this.Data.AgentId;
         }
     }
 }

@@ -22,6 +22,21 @@ namespace MoveManager.Business.Agent
             Model.Agent agent,
             Commands.AppointmentUpdateCommand command)
         {
+            if (command.AggregateId == Guid.Empty)
+                return CommandResult.Failed(
+                    new AgentNotFoundError(command.AggregateId));
+
+            if (!agent.IsValidAddress(command.Data.Address))
+                return CommandResult.Failed(
+                    new InvalidAddressError(command.Data.Address));
+
+            if (!agent.IsValidSchedule(command.Data.StartDate, command.Data.EndDate))
+                return CommandResult.Failed(
+                    new InvalidScheduleError(
+                        command.Data.StartDate,
+                        command.Data.EndDate,
+                        command.Data.AgentId));
+
             if (command.Data.AppointmentId != 0)
             {
                 if (agent.HasAppointment(command.Data.AppointmentId))

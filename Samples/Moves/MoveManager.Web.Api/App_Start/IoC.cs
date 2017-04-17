@@ -34,11 +34,16 @@ namespace MoveManager.Web.Api.App_Start
             container.RegisterType<CallController>();
 
             //Services
-            container.RegisterType<ICallService, CallService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICallService, CallService>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IAgentService, AgentService>(
+                new HierarchicalLifetimeManager());
 
             //Cqrs
-            container.RegisterType<ICommandProcessor, CommandProcessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IEventStorage, SqlEventStorage>(new HierarchicalLifetimeManager());
+            container.RegisterType<ICommandProcessor, CommandProcessor>(
+                new HierarchicalLifetimeManager());
+            container.RegisterType<IEventStorage, SqlEventStorage>(
+                new HierarchicalLifetimeManager());
             container.RegisterType<ISqlEventStorageConfiguration, SqlAggregateStorageConfiguration>(
                 new HierarchicalLifetimeManager());
 
